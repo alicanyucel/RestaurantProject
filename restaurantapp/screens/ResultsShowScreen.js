@@ -1,6 +1,5 @@
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import yelp from '../api/yelp';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -10,16 +9,23 @@ export default function ResultsShowScreen({ route }) {
   const id = route.params.id;
 
   const getResult = async (id) => {
-    const response = await yelp.get(`/${id}`);
-    console.log(response.data);
-    setResult(response.data);
+    try {
+      const response = await yelp.get(`/${id}`);
+      console.log(response.data);
+      setResult(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
+  
   useEffect(() => {
     getResult(id);
-  }, []);
+  }, [id]); 
+
+ 
   if (!result) {
-    return null;
+    return <Text>Loading...</Text>;
   }
 
   return (
@@ -39,6 +45,7 @@ export default function ResultsShowScreen({ route }) {
         renderItem={({ item }) => {
           return <Image style={styles.image} source={{ uri: item }} />;
         }}
+        keyExtractor={(item, index) => index.toString()}  
       />
     </View>
   );

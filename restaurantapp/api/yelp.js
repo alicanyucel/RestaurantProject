@@ -1,9 +1,27 @@
-import axios from 'axios';
+export default async function fetchYelpData() {
+  const url = 'https://api.yelp.com/v3/businesses';
+  const headers = {
+    'Authorization': 'Bearer aETOPuVSQ-luGy16YjLMitcWYtZh4W9pRa8Z8hk5Tz42JZA2f2UPY0ve9r7XDLnrlfVrbVqqJ-MagxP1AugW2wZgFVw2cl2ci8tq0UnFZRzUsT7_x_0-7hVa4F-RZHYx',
+    'Content-Type': 'application/json',
+  };
 
-export default axios.create({
-  baseURL: 'https://api.yelp.com/v3/businesses',
-  headers: {
-    Authorization:
-      'Bearer aETOPuVSQ-luGy16YjLMitcWYtZh4W9pRa8Z8hk5Tz42JZA2f2UPY0ve9r7XDLnrlfVrbVqqJ-MagxP1AugW2wZgFVw2cl2ci8tq0UnFZRzUsT7_x_0-7hVa4F-RZHYx',
-  },
-});
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+
+    console.error('Error fetching data: ', error);
+    return null;
+  }
+}
