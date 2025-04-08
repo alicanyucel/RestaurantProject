@@ -4,7 +4,6 @@ import React from 'react';
 export default function SearchScreen() {
   return (
     <View>
-     <Text>Arama Ekranı</Text>
     </View>
   );
 }
