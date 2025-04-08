@@ -1,8 +1,7 @@
 export default async function fetchYelpData() {
   const url = 'https://api.yelp.com/v3/businesses';
   const headers = {
-    'Authorization': 'Bearer aETOPuVSQ-luGy16YjLMitcWYtZh4W9pRa8Z8hk5Tz42JZA2f2UPY0ve9r7XDLnrlfVrbVqqJ-MagxP1AugW2wZgFVw2cl2ci8tq0UnFZRzUsT7_x_0-7hVa4F-RZHYx',
-    'Content-Type': 'application/json',
+    'Authorization': 'Bearer aETOPuVSQ-luGy16YjLMitcWYtZh4W9pRa8Z8hk5Tz42JZA2f2UPY0ve9r7XDLnrlfVrbVqqJ-MagxP1AugW2wZgFVw2cl2ci8tq0UnFZRzUsT7_x_0-7hVa4F-RZHYx'
   };
 
   try {
@@ -11,6 +10,7 @@ export default async function fetchYelpData() {
       headers: headers,
     });
 
+    debugger;
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
